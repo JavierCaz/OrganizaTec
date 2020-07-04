@@ -23,9 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: organizatec_development
-  username: <%= ENV['ORGANIZATEC_DATABASE_DEV_USER'] %>
-  password: <%= ENV['ORGANIZATEC_DATABASE_DEV_PASSWORD'] %>
+  database: OrganizaTec_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
