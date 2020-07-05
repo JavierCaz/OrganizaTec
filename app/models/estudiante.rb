@@ -1,4 +1,4 @@
 class Estudiante < ApplicationRecord
-    belong_to :estudiante_progreso
-    belong_to :carrera
+    belongs_to :estudiante_progreso
+    belongs_to :carrera
 end
