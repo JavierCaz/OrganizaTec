@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_05_163115) do
+ActiveRecord::Schema.define(version: 2020_07_10_002927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "carreras", force: :cascade do |t|
     t.string "nombre"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
   create_table "carreras_subjects", id: false, force: :cascade do |t|
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 2020_07_05_163115) do
     t.integer "servSocial"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "estudiante_id"
+    t.index ["estudiante_id"], name: "index_estudiante_progresos_on_estudiante_id"
   end
 
   create_table "estudiantes", force: :cascade do |t|
@@ -41,14 +43,12 @@ ActiveRecord::Schema.define(version: 2020_07_05_163115) do
     t.string "nombre"
     t.string "correo"
     t.string "pass"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "estudiante_progreso_id"
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.bigint "carrera_id"
     t.integer "semestres"
     t.integer "veranos"
     t.index ["carrera_id"], name: "index_estudiantes_on_carrera_id"
-    t.index ["estudiante_progreso_id"], name: "index_estudiantes_on_estudiante_progreso_id"
   end
 
   create_table "materias_cursadas", force: :cascade do |t|
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2020_07_05_163115) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "estudiante_progresos", "estudiantes"
   add_foreign_key "estudiantes", "carreras"
-  add_foreign_key "estudiantes", "estudiante_progresos"
   add_foreign_key "materias_cursadas", "estudiante_progresos"
   add_foreign_key "materias_cursadas", "subjects"
 end

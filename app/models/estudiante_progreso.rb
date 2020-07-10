@@ -1,4 +1,4 @@
 class EstudianteProgreso < ApplicationRecord
-    has_one :estudiante
+    belongs_to :estudiante
     has_many :materias_cursadas
 end
