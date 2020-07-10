@@ -1,19 +1,15 @@
 class SignUpController < ApplicationController
   def get_subjects
     @subjects = Subject.all
-    puts 'AAAAAAAAAAAAAAAAAAAAAAAAA'
     render json: @subjects
   end
 
   def create_student
-    puts 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-    @estudiante = Estudiante.create(id: params[:id])
-
-      render json: {status: :created, location: @estudiante}
+    Estudiante.create(noControl: params[:noControl], correo: params[:correo], pass: params[:pass], nombre: params[:nombre], carrera_id: params[:carrera_id])
+    render json: {}
   end
 
   def create_subject
-    puts 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
     subject_id = params[:id]
     Subject.create(id: params[:id])
   end

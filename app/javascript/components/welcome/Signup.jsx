@@ -45,8 +45,9 @@ export default function Signup(props) {
         nombre: name,
         correo: email,
         pass: password,
+        carrera_id: 1,
       })
-    }).then(response => response.json())
+    }).then(response => console.log(response))
       .then(response => getSubjects)
   }
 

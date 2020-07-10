@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 2020_07_10_002927) do
 
   create_table "carreras", force: :cascade do |t|
     t.string "nombre"
-    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "carreras_subjects", id: false, force: :cascade do |t|
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 2020_07_10_002927) do
     t.string "nombre"
     t.string "correo"
     t.string "pass"
-    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.bigint "carrera_id"
     t.integer "semestres"
     t.integer "veranos"
