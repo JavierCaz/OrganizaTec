@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   get 'welcome/login'
   post 'welcome/login/verifyUser', to: 'log_in#verifyUser'
 
+  get 'welcome/sign_up'
+
+  get 'welcome/sign_up/get_subjects', to: 'sign_up#get_subjects'
+  post 'welcome/sign_up/create_student', to: 'sign_up#create_student'  
+  post 'welcome/sign_up/create_subject', to: 'sign_up#create_subject'  
 end
