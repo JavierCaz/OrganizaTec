@@ -13,15 +13,13 @@ export default function Signup(props) {
 
   const texto = ["This is ", <strong>not</strong>, " working."]
 
-  const [count, setCount] = React.useState(0);
-
-  React.useEffect( ()=>{
+  React.useEffect(() => {
     fetch('/welcome/sign_up/get_careers')
-    .then(response => response.json())
-    .then(careers => {setCareers(careers); console.log('Carreras', careers);})
+      .then(response => response.json())
+      .then(careers => { setCareers(careers); console.log('Carreras', careers); })
   }, []);
 
-  const options = careers.map((option) => <MenuItem key={option.nombre} value={option.id}>{option.nombre}</MenuItem>)
+  const options = careers.map((option) => <MenuItem key={option.id} value={option.id}>{option.name}</MenuItem>)
 
   let getSubjects = (e) => {
     console.log(name, JSON.stringify(name))
@@ -58,11 +56,11 @@ export default function Signup(props) {
         carrera_id: career,
       })
     }).then(response => response.json())
-    .then(response => console.log(response))
+      .then(response => console.log(response))
   }
 
   return (
-    <Container style={{display: 'flex', justifyContent: 'center'}}>
+    <Container style={{ display: 'flex', justifyContent: 'center' }}>
       <Grid container direction='column' justify='center' spacing={2}>
         <Grid container item justify='center'>
           <TextField variant="outlined" type="text" name="nombre" placeholder="Nombre Completo" value={name} onChange={(e) => setName(e.target.value)} />
@@ -79,10 +77,10 @@ export default function Signup(props) {
         <Grid container item justify='center' >
           <FormControl variant="outlined" style={{ minWidth: '300px', margin: '20px' }}>
             <InputLabel>Seleccionar carrera</InputLabel>
-            <Select value={career} onChange={(e)=> setCareer(e.target.value)}>
+            <Select value={career} onChange={(e) => setCareer(e.target.value)}>
               {options}
             </Select>
-            </FormControl>
+          </FormControl>
         </Grid>
         <Grid container item justify='center' >
           <Button type="submit" variant="contained" onClick={handleSubmit}>Sign Up</Button>
