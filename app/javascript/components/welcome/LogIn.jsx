@@ -87,7 +87,7 @@ export default function LogIn() {
       console.log(data.res); // JSON data parsed by `data.json()` call
       if(data.res == true){
         console.log('app')
-        window.location.href = "http://localhost:3000";
+        window.location.href = "/";
       }
     });
   }

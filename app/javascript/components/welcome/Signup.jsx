@@ -1,4 +1,4 @@
-import { Button, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core'
+import { Button, Select, MenuItem, InputLabel, FormControl, Grid, TextField, Container } from '@material-ui/core'
 import React from "react"
 
 export default function Signup(props) {
@@ -9,20 +9,32 @@ export default function Signup(props) {
   const [email, setEmail] = React.useState('');
   const [career, setCareer] = React.useState('')
   const [json, setJson] = React.useState('')
+  const [careers, setCareers] = React.useState([]);
 
   const texto = ["This is ", <strong>not</strong>, " working."]
 
+  const [count, setCount] = React.useState(0);
 
-  const carreras = [
-    { nombre: 'siztemz' },
-    { nombre: 'tikz' },
-    { nombre: 'induztrial' },
-    { nombre: 'otra' },
-  ]
+  React.useEffect( ()=>{
+    fetch('/welcome/sign_up/get_careers')
+    .then(response => response.json())
+    .then(careers => {setCareers(careers); console.log('Carreras', careers);})
+  }, []);
+
+  const options = careers.map((option) => <MenuItem key={option.nombre} value={option.id}>{option.nombre}</MenuItem>)
 
   let getSubjects = (e) => {
     console.log(name, JSON.stringify(name))
     fetch('/welcome/sign_up/get_subjects')
+      .then(response => response.json())
+      .then(myJson => {
+        setJson(myJson)
+        console.log(myJson)
+      });
+  }
+  let getStudents = (e) => {
+    console.log(name, JSON.stringify(name))
+    fetch('/welcome/sign_up/get_students')
       .then(response => response.json())
       .then(myJson => {
         setJson(myJson)
@@ -34,50 +46,48 @@ export default function Signup(props) {
     e.preventDefault();
     fetch('/welcome/sign_up/create_student', {
       headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json',
         'X-CSRF-Token': document.getElementsByTagName('meta')["csrf-token"].content
       },
       method: "POST",
-      mode: "cors",
       body: JSON.stringify({
         noControl: controlNumber,
         nombre: name,
         correo: email,
         pass: password,
-        carrera_id: 2,
+        carrera_id: career,
       })
-    }).then(response => console.log(response))
-      .then(response => getSubjects)
+    }).then(response => response.json())
+    .then(response => console.log(response))
   }
 
-  const options = carreras.map((option) => <MenuItem key={option.nombre} value={option.nombre}>{option.nombre}</MenuItem>)
   return (
-    <React.Fragment>
-      <div>
-        <div className="container">
-          <h1>Registro</h1>
-          <form action="" onSubmit={handleSubmit}>
-            <input type="text" name="nombre" placeholder="Nombre Completo" value={name} onChange={(e) => setName(e.target.value)} />
-            <input type="text" name="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-            <input type="text" name="noControl" placeholder="No. Control" value={controlNumber} onChange={(e) => setControlNumber(e.target.value)} />
-            <input type="email" name="email" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" name="pass" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <FormControl variant="outlined" style={{ minWidth: '300px', margin: '20px' }}>
-              <InputLabel>Seleccionar carrera</InputLabel>
-              <Select value={career} onChange={(e) => { setCareer(e.target.value) }}>
-                {options}
-              </Select>
+    <Container style={{display: 'flex', justifyContent: 'center'}}>
+      <Grid container direction='column' justify='center' spacing={2}>
+        <Grid container item justify='center'>
+          <TextField variant="outlined" type="text" name="nombre" placeholder="Nombre Completo" value={name} onChange={(e) => setName(e.target.value)} />
+        </Grid>
+        <Grid container item justify='center'>
+          <TextField variant="outlined" type="text" name="noControl" placeholder="No. Control" value={controlNumber} onChange={(e) => setControlNumber(e.target.value)} />
+        </Grid>
+        <Grid container item justify='center'>
+          <TextField variant="outlined" type="email" name="email" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </Grid>
+        <Grid container item justify='center' >
+          <TextField variant="outlined" type="password" name="pass" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </Grid>
+        <Grid container item justify='center' >
+          <FormControl variant="outlined" style={{ minWidth: '300px', margin: '20px' }}>
+            <InputLabel>Seleccionar carrera</InputLabel>
+            <Select value={career} onChange={(e)=> setCareer(e.target.value)}>
+              {options}
+            </Select>
             </FormControl>
-            <input type="submit" value="Submite" />
-          </form>
-          <br />
-          <button onClick={getSubjects}>Get Request</button>
-
-          <div id="aqui">{(json != '') && json.map((item) => (<li key={item.id}>nombre: {item.nombre ? item.nombre : "sin nombre"}, id:{item.id}</li>))}</div>
-
-        </div>
-      </div>
-    </React.Fragment>
+        </Grid>
+        <Grid container item justify='center' >
+          <Button type="submit" variant="contained" onClick={handleSubmit}>Sign Up</Button>
+        </Grid>
+      </Grid>
+    </Container>
   )
 }

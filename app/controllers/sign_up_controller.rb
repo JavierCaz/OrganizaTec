@@ -4,6 +4,16 @@ class SignUpController < ApplicationController
     render json: @subjects
   end
 
+  def get_students
+    subjects = Estudiante.all
+    render json: subjects
+  end
+  
+  def get_careers
+    carreras = Carrera.all
+    render json: carreras
+  end
+
   def create_student
     Estudiante.create(noControl: params[:noControl], correo: params[:correo], pass: params[:pass], nombre: params[:nombre], carrera_id: params[:carrera_id])
     render json: {}
