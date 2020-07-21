@@ -1,4 +1,5 @@
 class LogInController < ApplicationController
+
   def verifyUser
     res = false
 

@@ -20,8 +20,11 @@ class Welcome extends React.Component {
             <Button variant="contained" color="primary" href={dirRoot + "/welcome/login"}>
               LogIn
           </Button>
-            <Button variant="contained" color="primary" href={dirRoot + "/welcome/signup"}>
+          <Button variant="contained" color="primary" href={dirRoot + "/welcome/signup"}>
               SignUp
+          </Button>
+          <Button variant="contained" color="primary" href={dirRoot + "/welcome/signedin"}>
+              SignedIn View
           </Button>
           </Grid>
         </Grid>

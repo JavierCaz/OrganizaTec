@@ -15,5 +15,14 @@ module OrganizaTec
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    ActionMailer::Base.smtp_settings = {
+      :address => 'smtp.office365.com',
+      :domain => 'outlook.com',
+      :port => 587,
+      :user_name => "organizatec@outlook.com",
+      :password => "MPDT8dJGanu7Wvd",
+      :authentication => 'login',
+      :enable_starttls_auto => true
+    }
   end
 end

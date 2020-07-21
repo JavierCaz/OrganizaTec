@@ -13,6 +13,10 @@
   </head>
 
   <body>
+  <% if student_signed_in? %>
+  <p>Hello, <%= current_student.email %> - <%= link_to "Sign_out", destroy_student_session_path, :method => 'delete' %></p>
+  <br/>
+  <% end %>
     <%= yield %>
   </body>
 </html>

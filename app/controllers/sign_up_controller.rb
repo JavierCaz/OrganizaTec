@@ -1,4 +1,5 @@
 class SignUpController < ApplicationController
+
   def get_students
     subjects = Student.all
     render json: subjects

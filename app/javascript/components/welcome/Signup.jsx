@@ -1,7 +1,6 @@
 import { Button, Select, MenuItem, InputLabel, FormControl, Grid, TextField, Container, Typography, SvgIcon } from '@material-ui/core'
 import React from "react"
 
-
 export default function Signup(props) {
   const [name, setName] = React.useState('');
   const [controlNumber, setControlNumber] = React.useState('');
@@ -13,7 +12,7 @@ export default function Signup(props) {
   React.useEffect(() => {
     fetch('/welcome/sign_up/get_careers')
       .then(response => response.json())
-      .then(careers => { setCareers(careers); console.log('Carreras', careers); })
+      .then(careers => setCareers(careers) )
   }, []);
 
   const options = careers.map((option) => <MenuItem key={option.id} value={option.id}>{option.name}</MenuItem>)
@@ -39,9 +38,6 @@ export default function Signup(props) {
   return (
     <Container className="signup-container R-COLUMN R-ALIGN-Y-START R-ALIGN-X-CENTER">
       <Grid container direction='column' justify='center' alignItems='center' spacing={2}>
-        <Grid item>
-          <Typography variant='h1'>Registro</Typography>
-        </Grid>
         <Grid item >
           <TextField required variant="outlined" type="text" name="nombre" placeholder="Nombre Completo" value={name} onChange={(e) => setName(e.target.value)} />
         </Grid>
@@ -55,7 +51,7 @@ export default function Signup(props) {
           <TextField required variant="outlined" type="password" name="pass" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </Grid>
         <Grid item >
-          <FormControl required variant="outlined" style={{ minWidth: '300px'}}>
+          <FormControl required variant="outlined" style={{ minWidth: '300px' }}>
             <InputLabel>Seleccionar carrera</InputLabel>
             <Select value={career} onChange={(e) => setCareer(e.target.value)} label="Seleccionar carrera">
               <MenuItem value="">None</MenuItem>
