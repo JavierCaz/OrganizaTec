@@ -10,7 +10,13 @@ Rails.application.routes.draw do
   get 'welcome/sign_up/get_careers', to: 'sign_up#get_careers'
   post 'welcome/sign_up/create_student', to: 'sign_up#create_student'
   
+  get 'welcome/profile'
+  post 'welcome/profile/update', to: 'welcome#updateProfile'
+
   get 'welcome/signedin'
+  get 'welcome/studyplan'
+  get 'welcome/studentprogress'
+
   get  'welcome/signedin/get_careers', to: 'signedin#get_careers'
 
 end

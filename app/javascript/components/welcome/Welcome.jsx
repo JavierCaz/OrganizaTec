@@ -11,21 +11,30 @@ class Welcome extends React.Component {
 
     return (
       <React.Fragment>
-        <Grid className="welcome-container" container direction='column' alignItems='center'>
+        <Grid className="welcome-container" container direction='column' alignItems='center' spacing={3}>
           <CssBaseline />
           <Grid item>
             <img src="" alt="Imagen organizatec"/>
           </Grid>
           <Grid item>
             <Button variant="contained" color="primary" href={dirRoot + "/welcome/login"}>
-              LogIn
-          </Button>
-          <Button variant="contained" color="primary" href={dirRoot + "/welcome/signup"}>
-              SignUp
-          </Button>
-          <Button variant="contained" color="primary" href={dirRoot + "/welcome/signedin"}>
-              SignedIn View
-          </Button>
+                LogIn
+            </Button>
+            <Button variant="contained" color="primary" href={dirRoot + "/welcome/signup"}>
+                SignUp
+            </Button>
+            <Button variant="contained" color="primary" href={dirRoot + "/welcome/signedin"}>
+                SignedIn View
+            </Button>
+            <Button variant="contained" color="primary" href={dirRoot + "/welcome/profile"}>
+                Profile
+            </Button>
+            <Button variant="contained" color="primary" href={dirRoot + "/welcome/studyplan"}>
+                Study Plan
+            </Button>
+            <Button variant="contained" color="primary" href={dirRoot + "/welcome/studentprogress"}>
+                Student Progress
+            </Button>
           </Grid>
         </Grid>
       </React.Fragment>

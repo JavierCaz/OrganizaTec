@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+    
     private
-
     def sign_up_params
         params.require(:student).permit(:control_number, :name, :email, :career_id, :password, :password_confirmation)
     end
