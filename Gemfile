@@ -24,7 +24,11 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'react-rails'
 
+gem 'wdm', '>= 0.1.0'
+
 gem 'devise'
+
+gem 'dotenv-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

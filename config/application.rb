@@ -16,11 +16,11 @@ module OrganizaTec
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     ActionMailer::Base.smtp_settings = {
-      :address => 'smtp-relay.sendinblue.com',
+      :address => ENV['SMTPADDRESS'],
       :domain => 'outlook.com',
       :port => 587,
-      :user_name => "adrianperezm.00@gmail.com",
-      :password => "w6qcdgjmNYBaK18z",
+      :user_name => ENV['SENDINEMAIL'],
+      :password => ENV['SENDINPSW'],
       :authentication => 'login',
       :enable_starttls_auto => true
     }
