@@ -10,7 +10,7 @@ class Welcome extends React.Component {
     let dirRoot = window.location.protocol + "//" + window.location.host
 
     return (
-      <React.Fragment>
+      <Container component='main'>
         <Grid className="welcome-container" container direction='column' alignItems='center' spacing={3}>
           <CssBaseline />
           <Grid item>
@@ -52,7 +52,7 @@ class Welcome extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-      </React.Fragment>
+      </Container>
     );
   }
 }
