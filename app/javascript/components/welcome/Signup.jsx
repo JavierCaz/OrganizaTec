@@ -39,29 +39,29 @@ export default function Signup(props) {
     <Container className="signup-container R-COLUMN R-ALIGN-Y-START R-ALIGN-X-CENTER">
       <Grid container direction='column' justify='center' alignItems='center' spacing={2}>
         <Grid item >
-          <TextField required variant="outlined" type="text" name="nombre" placeholder="Nombre Completo" value={name} onChange={(e) => setName(e.target.value)} />
+          <TextField required variant="outlined" type="text" name="sex" placeholder="Genero Masculino/Femenino" />
         </Grid>
         <Grid item >
-          <TextField required variant="outlined" type="text" name="noControl" placeholder="No. Control" value={controlNumber} onChange={(e) => setControlNumber(e.target.value)} />
+          <TextField required variant="outlined" type="text" name="age" placeholder="Edad" />
         </Grid>
         <Grid item >
-          <TextField required variant="outlined" type="email" name="email" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <TextField required variant="outlined" type="text" name="timetravel" placeholder="Tiempo de viaje" />
         </Grid>
         <Grid item >
-          <TextField required variant="outlined" type="password" name="pass" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <TextField required variant="outlined" type="text" name="studytime" placeholder="Horas de estudio" />
         </Grid>
         <Grid item >
-          <FormControl required variant="outlined" style={{ minWidth: '300px' }}>
-            <InputLabel>Seleccionar carrera</InputLabel>
-            <Select value={career} onChange={(e) => setCareer(e.target.value)} label="Seleccionar carrera">
-              <MenuItem value="">None</MenuItem>
-              {options}
-            </Select>
-          </FormControl>
+          <TextField required variant="outlined" type="text" name="failures" placeholder="Faltas" />
         </Grid>
-        <Grid container item justify='center' >
-          <Button type="submit" variant="contained" onClick={handleSubmit}>
-            Registrarse
+        <Grid item >
+          <TextField required variant="outlined" type="text" name="absences" placeholder="Ausencias" />
+        </Grid>
+        <Grid item >
+          <TextField required variant="outlined" type="text" name="subject" placeholder="Materia" />
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary">
+            Save data
           </Button>
         </Grid>
       </Grid>

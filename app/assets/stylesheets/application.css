@@ -25,7 +25,7 @@
 
 * {
     box-sizing: border-box;
-    margin: 0;
+    /* margin: 0; */
     bottom: 0;
 }
 
@@ -44,11 +44,11 @@
 }
 
 .tbl {
-    margin: 4rem 0;
+    margin: auto;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     width: 90%;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .header-row {
@@ -99,5 +99,17 @@ label.column {
     align-items: center;
     justify-content: center;
     border-radius: 16px;
-    background-color: rgba(255, 196, 196, 0.904);
+    background-color: #ff4a4a;
+}
+
+.item.header {
+    background-color: #b3b3b3;
+    color: #fff;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
 }

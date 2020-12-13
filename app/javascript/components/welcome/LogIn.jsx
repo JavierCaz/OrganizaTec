@@ -1,164 +1,108 @@
 import React from "react"
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="#">
-        OrganizaTec
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+// import Button from '@material-ui/core/Button';
+// import Grid from '@material-ui/core/Grid';
+// import Typography from '@material-ui/core/Typography';
+// import Container from '@material-ui/core/Container';
+import { Button, Grid, Container, Typography, Slider } from '@material-ui/core/';
 
 export default function LogIn() {
-  const classes = useStyles();
 
-  const [email, setEmail] = React.useState('');
-  const [pass, setPass] = React.useState('');
-
-
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
-  const handleChangePass = (event) => {
-    setPass(event.target.value);
-  };
+  const [subjSelected, setSubjSelected] = React.useState('')
+  const [currentPrediction, setCurrentPrediction] = React.useState(0)
+  const [studyTime, setStudyTime] = React.useState(1)
+  const [absences, setAbsences] = React.useState(0)
 
   let dirRoot = window.location.protocol + "//" + window.location.host
 
-  async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        'X-CSRF-Token': document.getElementsByTagName('meta')["csrf-token"].content
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
+  const handleChangeStudyT = (e, value) => {
+    value > studyTime ? setCurrentPrediction(currentPrediction+0.45):setCurrentPrediction(currentPrediction-0.45)
+    setStudyTime(value)
   }
-
-  const  handleLoginSubmit = () => {
-    postData( dirRoot + '/welcome/login/verifyUser', {email: email, pass: pass})
-    .then(data => {
-      console.log(data.res); // JSON data parsed by `data.json()` call
-      if(data.res == true){
-        console.log('app')
-        window.location.href = "/";
-      }
-    });
+  const handleChangeAbsences = (e, value) => {
+    value > absences ? setCurrentPrediction(currentPrediction-0.32):setCurrentPrediction(currentPrediction+0.32)
+    setAbsences(value)
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Iniciar Sesion
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            value={email}
-            onChange={handleChangeEmail}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Correo Electronico"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            value={pass}
-            onChange={handleChangePass}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Contraseña"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Recordar mi usuario"
-          />
-          <Button
-            onClick={handleLoginSubmit}
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Iniciar Sesion
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                ¿Olvidaste tu contraseña?
-              </Link>
+    <Container component="main" >
+      <h2 style={{ textAlign: 'center' }}>Grades Preditcion</h2>
+      <Grid container justify='center' alignItems='center' spacing={2}>
+        <Grid item>
+          <Button variant='contained' color='primary' onClick={() => { setSubjSelected(1); setCurrentPrediction(95.5813); setStudyTime(1); setAbsences(0) }}>Subject 1</Button>
+        </Grid>
+        <Grid item>
+          <Button variant='contained' color='primary' onClick={() => { setSubjSelected(2); setCurrentPrediction(90.5813); setStudyTime(1); setAbsences(0) }}>Subject 2</Button>
+        </Grid>
+        <Grid item>
+          <Button variant='contained' color='primary' onClick={() => { setSubjSelected(3); setCurrentPrediction(85.2546); setStudyTime(1); setAbsences(0) }}>Subject 3</Button>
+        </Grid>
+        <Grid item>
+          <Button variant='contained' color='primary' onClick={() => { setSubjSelected(4); setCurrentPrediction(89.8113); setStudyTime(1); setAbsences(0) }}>Subject 4</Button>
+        </Grid>
+        <Grid item>
+          <Button variant='contained' color='primary' onClick={() => { setSubjSelected(5); setCurrentPrediction(92.5813); setStudyTime(1); setAbsences(0) }}>Subject 5</Button>
+        </Grid>
+      </Grid>
+      {subjSelected != '' &&
+        <Grid container spacing={2} justify='space-evenly'>
+          <Grid container direction='column' spacing={2} xs={4}>
+            <Grid item>
+              <Typography id="studytime-slider" gutterBottom>
+                Study time
+              </Typography>
+              <Slider
+                value={studyTime}
+                aria-labelledby="studytime-slider"
+                valueLabelDisplay="auto"
+                step={1}
+                marks={[{value: 0, label:'<2 hr'},{value:1, label:'2-5 hrs'},{value:2,label:'5-10 hrs'},{value:3,label:'>10 hrs'}]}
+                min={0}
+                max={3}
+                onChange={handleChangeStudyT}
+              />
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"¿No tienes cuentas? Registrate"}
-              </Link>
+              <Typography id="absences-slider" gutterBottom>
+                Absences
+              </Typography>
+              <Slider
+                value={absences}
+                aria-labelledby="absences-slider"
+                valueLabelDisplay="auto"
+                step={1}
+                marks={[{value:0,label:'0'},{value:1,label:'1'},{value:2,label:'2'},{value:3,label:'3'},{value: 4,label:'4'},{value:5,label:'5'},{value:6,label:'6'},{value: 7,label:'7'},{value:8,label:'8'},{value: 9,label:'9'},{value:10,label:'10'}]}
+                min={0}
+                max={10}
+                onChange={handleChangeAbsences}
+              />
             </Grid>
           </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
+          <Grid container direction='column' spacing={2} xs={6}>
+            <Grid item>
+              <h3>Prediction for - subject {subjSelected}</h3>
+            </Grid>
+            <Grid item>
+              <h4 style={{ textAlign: 'center' }}>
+                {subjSelected == 1 && 
+                  <label>{currentPrediction.toFixed(4)}</label>
+                }
+                {subjSelected == 2 && 
+                  <label>{currentPrediction.toFixed(4)}</label>
+                }
+                {subjSelected == 3 && 
+                  <label>{currentPrediction.toFixed(4)}</label>
+                }
+                {subjSelected == 4 && 
+                  <label>{currentPrediction.toFixed(4)}</label>
+                }
+                {subjSelected == 5 && 
+                  <label>{currentPrediction.toFixed(4)}</label>
+                }
+              </h4>
+            </Grid>
+          </Grid>
+        </Grid>
+      }
     </Container>
   );
 }
